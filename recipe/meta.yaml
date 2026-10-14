@@ -1,8 +1,7 @@
 {% set name = "pytimeparse" %}
-{% set version = "1.1.8" %}
+{% set version = "1.1.9" %}
 {% set bundle = "tar.gz" %}
-{% set hash_type = "sha256" %}
-{% set hash = "e86136477be924d7e670646a98561957e8ca7308d44841e21f5ddea757556a0a" %}
+{% set hash = "1f1c0bedcfbe481b78f7cb11dba7d81039455af8ba014eafc6df060c9c0ab156" %}
 
 package:
   name: {{ name|lower }}
@@ -10,31 +9,37 @@ package:
 
 source:
   fn: {{ name }}-{{ version }}.{{ bundle }}
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.{{ bundle }}
-  {{ hash_type }}: {{ hash }}
+  url: https://pypi.org/packages/source/p/pytimeparse/pytimeparse-1.1.9.tar.gz
+  sha256: {{ hash }}
 
 build:
   number: 0
-  script: python -m pip install --no-deps --ignore-installed .
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation
+  skip: true  # [py<311]
 
 requirements:
   host:
     - python
     - pip
-
   run:
     - python
 
 test:
   imports:
     - pytimeparse
+  commands:
+    - pip check
+    - pip check
+    - pip check
+  requires:
+    - pip
 
 about:
   home: https://github.com/wroberts/pytimeparse
   license: MIT
   license_family: MIT
   license_file: LICENSE.rst
-  summary: 'A small Python library to parse various kinds of time expressions'
+  summary: A small Python library to parse various kinds of time expressions
   doc_url: https://github.com/wroberts/pytimeparse
   dev_url: https://github.com/wroberts/pytimeparse
 
