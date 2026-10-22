@@ -24,13 +24,17 @@ requirements:
     - python
 
 test:
+  source_files:
+    - pytimeparse
   imports:
     - pytimeparse
   requires:
     - pip
+    - pytest
   commands:
     - pip check
     - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
+    - pytest -vv pytimeparse/tests/testtimeparse.py
 
 about:
   home: https://github.com/wroberts/pytimeparse
