@@ -1,8 +1,8 @@
 {% set name = "pytimeparse" %}
-{% set version = "1.1.8" %}
+{% set version = "1.1.10" %}
 {% set bundle = "tar.gz" %}
 {% set hash_type = "sha256" %}
-{% set hash = "e86136477be924d7e670646a98561957e8ca7308d44841e21f5ddea757556a0a" %}
+{% set hash = "ecf0ee613a72cb0b1d3d5404bd398a64266576fc36ccf3149178af6f2ec6f736" %}
 
 package:
   name: {{ name|lower }}
