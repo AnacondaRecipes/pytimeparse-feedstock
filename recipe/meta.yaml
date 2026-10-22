@@ -32,7 +32,7 @@ about:
   license: MIT
   license_family: MIT
   license_file: LICENSE.rst
-  summary: 'A small Python library to parse various kinds of time expressions'
+  summary: A small Python library to parse various kinds of time expressions
   doc_url: https://github.com/wroberts/pytimeparse
   dev_url: https://github.com/wroberts/pytimeparse
 
