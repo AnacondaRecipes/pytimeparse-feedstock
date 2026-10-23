@@ -1,40 +1,47 @@
 {% set name = "pytimeparse" %}
-{% set version = "1.1.8" %}
-{% set bundle = "tar.gz" %}
-{% set hash_type = "sha256" %}
-{% set hash = "e86136477be924d7e670646a98561957e8ca7308d44841e21f5ddea757556a0a" %}
+{% set version = "1.1.10" %}
 
 package:
-  name: {{ name|lower }}
+  name: {{ name }}
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.{{ bundle }}
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.{{ bundle }}
-  {{ hash_type }}: {{ hash }}
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: ecf0ee613a72cb0b1d3d5404bd398a64266576fc36ccf3149178af6f2ec6f736
 
 build:
   number: 0
-  script: python -m pip install --no-deps --ignore-installed .
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vvv
+  skip: true  # [py<311]
 
 requirements:
   host:
     - python
     - pip
-
+    - setuptools
+    - wheel
   run:
     - python
 
 test:
+  source_files:
+    - pytimeparse
   imports:
     - pytimeparse
+  requires:
+    - pip
+    - pytest
+  commands:
+    - pip check
+    - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
+    - pytest -vv pytimeparse/tests/testtimeparse.py
 
 about:
   home: https://github.com/wroberts/pytimeparse
   license: MIT
   license_family: MIT
   license_file: LICENSE.rst
-  summary: 'A small Python library to parse various kinds of time expressions'
+  summary: A small Python library to parse various kinds of time expressions
   doc_url: https://github.com/wroberts/pytimeparse
   dev_url: https://github.com/wroberts/pytimeparse
 
